@@ -1,0 +1,19 @@
+name: drupalgovcon2017
+recipe: drupal8
+config:
+  webroot: docroot
+  php: '7.2'
+services:
+  appserver:
+    xdebug: false
+    build_as_root:
+      - echo "This installs Node.js. You can change to 8, 10, 12 or any major version."
+      - curl -sL https://deb.nodesource.com/setup_8.x | bash -
+      - apt-get purge -qq nodejs
+      - apt-get install -qq gcc g++ make nodejs
+    overrides:
+      image: 'acquia/ads-local:lando-php'
+      cap_add:
+        - SYS_ADMIN
+
+    
